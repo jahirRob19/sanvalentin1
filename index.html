@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ff9a9e" fill-opacity="1" d="M0,32L48,37.3C96,43,192,53,288,90.7C384,128,480,192,576,197.3C672,203,768,149,864,133.3C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>'),
+                        linear-gradient(to bottom, #ffdee9 0%, #b5fffc 100%);
+            font-family: 'Playfair Display', serif;
+            overflow: hidden;
+            position: relative;
+            background-repeat: no-repeat;
+            background-position: bottom;
+            background-size: 100% 50%, cover;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            animation: fadeIn 1.5s ease-in-out;
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            color: #ff2b2b;
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            animation: heartbeat 2s infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-family: 'Playfair Display', serif;
+        }
+
+        #siBtn {
+            background: #ff6b6b;
+            color: white;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        #siBtn:hover {
+            transform: scale(1.2);
+            background: #ff4b4b;
+        }
+
+        #noBtn {
+            background: #ff4b4b;
+            color: white;
+            position: relative;
+        }
+
+        #noBtn:hover {
+            transform: scale(1.2);
+            background: #d80000;
+        }
+
+        .message {
+            margin-top: 1rem;
+            color: #ff416c;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: none;
+            animation: fadeInMessage 2s ease-in-out;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .lyrics {
+            position: absolute;
+            top: 30%; /* Ajusta la posición vertical */
+            left: 35%;
+            transform: translateX(-50%);
+            color: #ff2b2b;
+            font-size: 2.5rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: bold;
+            opacity: 0;
+            animation: fadeInLyrics 1s ease-in-out forwards;
+            white-space: nowrap;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: #ff2b2b;
+            animation: floatVertical 5s ease-in-out infinite;
+            bottom: 10%;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px #ff6b6b; }
+            to { box-shadow: 0 0 20px #ff2b2b; }
+        }
+
+        @keyframes fadeInMessage {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLyrics {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        @keyframes floatVertical {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            button {
+                font-size: 1.1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .lyrics {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="pregunta">¿Quieres ser mi San Valentín?</h1>
+        <div class="buttons" id="botones">
+            <button id="siBtn">Sí</button>
+            <button id="noBtn">No</button>
+        </div>
+        <p class="message" id="mensaje">Eres el amor de mi vida, mi amor</p>
+    </div>
+
+    <div class="lyrics" id="lyrics"></div>
+
+    <audio id="audioSi" src="Wallows - Only Ecstasy (Official Audio) (mp3cut.net).mp3"></audio>
+
+    <script>
+        const lyricsElement = document.getElementById("lyrics");
+        const audio = document.getElementById("audioSi");
+        const pregunta = document.getElementById("pregunta");
+        const botones = document.getElementById("botones");
+
+        const lyrics = [
+            { text: "YOU", time: 0, animation: "zoomIn 1s ease-in-out forwards" },
+            { text: "ARE", time: 1, animation: "slideIn 1s ease-in-out forwards" },
+            { text: "MY ONLY", time: 1.8, animation: "zoomIn 1s ease-in-out forwards" },
+            { text: "ECSTASY", time: 2.4, animation: "slideIn 1s ease-in-out forwards" },
+            { text: "YOU", time: 3.1, animation: "zoomIn 1s ease-in-out forwards" },
+            { text: "ARE", time: 4, animation: "slideIn 1s ease-in-out forwards" },
+            { text: "THE ONLY ONE", time: 5, animation: "slideIn 1s ease-in-out forwards" },
+            { text: "FOR ME", time: 5.8, animation: "slideIn 1s ease-in-out forwards" },
+            { text: "", time: 6.5, animation: "slideIn 1s ease-in-out forwards" },
+        ];
+
+
+
+        document.getElementById("siBtn").addEventListener("click", function() {
+            // Ocultar la pregunta y los botones
+            pregunta.style.display = "none";
+            botones.style.display = "none";
+
+            // Mostrar el mensaje y la letra de la canción
+            const mensaje = document.getElementById("mensaje");
+            mensaje.style.display = "block";
+            mensaje.style.animation = "fadeInMessage 2s ease-in-out";
+            audio.play();
+
+            // Mostrar letras sincronizadas con la canción
+            lyrics.forEach((line) => {
+                setTimeout(() => {
+                    lyricsElement.textContent = line.text;
+                    lyricsElement.style.animation = line.animation;
+                }, line.time * 2100);
+            });
+
+            // Generar corazones
+            const numHearts = 30;
+            for (let i = 0; i < numHearts; i++) {
+                createHeart();
+            }
+        });
+
+        document.getElementById("noBtn").addEventListener("click", function() {
+            const btnNo = document.getElementById("noBtn");
+            const maxWidth = window.innerWidth - btnNo.offsetWidth;
+            const maxHeight = window.innerHeight - btnNo.offsetHeight;
+            
+            const randomX = Math.floor(Math.random() * maxWidth);
+            const randomY = Math.floor(Math.random() * maxHeight);
+            
+            // Asegurar que el botón no salga de la pantalla
+            const safeX = Math.min(Math.max(randomX, 0), maxWidth);
+            const safeY = Math.min(Math.max(randomY, 0), maxHeight);
+            
+            btnNo.style.position = 'absolute';
+            btnNo.style.left = `${safeX}px`;
+            btnNo.style.top = `${safeY}px`;
+        });
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(heart);
+
+            // Eliminar el corazón después de que termine la animación
+            setTimeout(() => {
+                heart.remove();
+            }, 25000);
+        }
+    </script>
+
+</body>
+</html>
